@@ -1,19 +1,50 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    Yoooooo whats up!!!!
+    <input type="text" v-model="message" />
+    <button @click="saveMessage(message)" type="button" class="btn btn-info">Save</button>
+    <button @click="resetMessage()" type="button" class="btn btn-warning">Reset</button>
+    <p>{{value}}</p>
+    <input type="number" v-model="number" />
+    <button @click="incrementCounter()" type="button" class="btn btn-success">Increment</button>
+    <button @click="decrementCounter()" type="button" class="btn btn-danger">Decrement</button>
+    <h2>{{counter}}</h2>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+  },
+  data() {
+    return {
+      message: '',
+    }
+  },
+  methods: {
+    saveMessage(message) {
+      console.log(message)
+      this.$store.dispatch('saveMessage', message)
+    },
+    resetMessage() {
+      this.$store.dispatch('resetMessage')
+    },
+    incrementCounter() {
+      this.$store.dispatch('incrementCounter', this.number)
+    },
+    decrementCounter() {
+      this.$store.dispatch('decrementCounter', this.number)
+    },
+  },
+  computed: {
+    value() {
+      return this.$store.state.message
+    },
+    counter() {
+      return this.$store.state.counter
+    }
   }
 }
 </script>
