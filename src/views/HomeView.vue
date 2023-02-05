@@ -21,6 +21,7 @@ export default {
   data() {
     return {
       message: '',
+      number: null
     }
   },
   methods: {
